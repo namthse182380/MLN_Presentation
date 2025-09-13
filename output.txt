@@ -90,7 +90,7 @@ module.exports = {
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/detailed-"],
   "exclude": ["node_modules"]
 }
 
@@ -103,169 +103,104 @@ module.exports = {
 // see https://nextjs.org/docs/app/building-your-application/configuring/typescript for more information.
 
 
-===== ./components/timeline-section.tsx =====
-"use client"
+===== ./components/chatbot-section.tsx =====
+// components/chatbot-section.tsx
+"use client";
+import { Button } from "./ui/button";
+import { Card } from "./ui/card";
+import { SendHorizonal } from "lucide-react";
+import Image from "next/image";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin } from "lucide-react"
-
-const timelineEvents = [
-  {
-    year: "2879 TCN",
-    title: "Thời Hồng Bàng",
-    description: "Vua Hùng thứ nhất lập nước Văn Lang, khởi đầu lịch sử dân tộc Việt Nam",
-    period: "Thời kỳ huyền thoại",
-    location: "Đồng bằng sông Hồng",
-    icon: "👑",
-  },
-  {
-    year: "257 TCN",
-    title: "Nước Âu Lạc",
-    description: "An Dương Vương thống nhất Âu Việt và Lạc Việt, xây dựng thành Cổ Loa",
-    period: "Thời kỳ cổ đại",
-    location: "Cổ Loa, Hà Nội",
-    icon: "🏰",
-  },
-  {
-    year: "111 TCN",
-    title: "Bắc thuộc lần 1",
-    description: "Nhà Hán chinh phục Âu Lạc, bắt đầu thời kỳ Bắc thuộc đầu tiên",
-    period: "Thời Bắc thuộc",
-    location: "Giao Chỉ",
-    icon: "⚔️",
-  },
-  {
-    year: "40 SCN",
-    title: "Khởi nghĩa Hai Bà Trưng",
-    description: "Trưng Trắc và Trưng Nhị khởi nghĩa chống quân Hán, lập nước Đại Cồ Việt",
-    period: "Thời kỳ kháng chiến",
-    location: "Mê Linh, Hà Nội",
-    icon: "👸",
-  },
-  {
-    year: "939",
-    title: "Ngô Quyền thắng trận Bạch Đằng",
-    description: "Đánh bại quân Nam Hán, kết thúc 1000 năm Bắc thuộc",
-    period: "Độc lập tự chủ",
-    location: "Sông Bạch Đằng",
-    icon: "🛡️",
-  },
-  {
-    year: "1010",
-    title: "Thăng Long thành đô",
-    description: "Lý Thái Tổ dời đô về Thăng Long, mở đầu thời kỳ phát triển rực rỡ",
-    period: "Nhà Lý",
-    location: "Thăng Long (Hà Nội)",
-    icon: "🏛️",
-  },
-]
-
-export function TimelineSection() {
-  const [selectedEvent, setSelectedEvent] = useState(0)
-
+export function ChatbotSection() {
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-100 to-white relative overflow-hidden">
-      <div className="absolute top-20 right-10 w-32 h-32 bg-gradient-to-br from-accent/10 to-secondary/10 rounded-full animate-parallax-float blur-xl"></div>
-      <div className="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-br from-secondary/10 to-accent/10 rounded-full animate-elegant-scale blur-xl"></div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <Badge className="mb-4 premium-card text-white animate-luxury-glow">Timeline Lịch Sử</Badge>
-          <h2 className="text-4xl md:text-5xl font-bold luxury-text mb-6">Dòng Chảy Thời Gian</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in-up">
-            Theo dõi những mốc son quan trọng trong lịch sử dân tộc Việt Nam
-          </p>
+    <div className="scroll-section dark text-white w-full bg-slate-900 overflow-hidden">
+      <Image
+        src="/chatbot-background.jpg"
+        alt="Abstract technology background"
+        fill
+        className="object-cover z-0 animate-subtle-zoom"
+      />
+      <div className="absolute inset-0 bg-slate-900/70 z-10"></div> 
+      <div className="absolute inset-0 bg-grid-white/[0.05] z-10"></div>
+      <div className="container relative z-20 mx-auto flex flex-col items-center justify-center h-full px-6">
+        <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                Trò chuyện cùng AI
+            </h2>
+            <p className="text-xl text-white/70 max-w-2xl mx-auto text-pretty">
+                Đặt câu hỏi của bạn về mối quan hệ giữa AI và con người, hoặc bất cứ điều gì bạn tò mò.
+            </p>
         </div>
-
-        <div className="relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-accent to-secondary rounded-full animate-luxury-glow"></div>
-
-          <div className="space-y-12">
-            {timelineEvents.map((event, index) => (
-              <div
-                key={index}
-                className={`flex items-center ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"} animate-fade-in-up`}
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <div className="flex-1 px-8">
-                  <Card
-                    className={`cursor-pointer sophisticated-hover premium-card ${
-                      selectedEvent === index ? "ring-2 ring-accent animate-luxury-glow" : ""
-                    }`}
-                    onClick={() => setSelectedEvent(index)}
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="text-2xl animate-elegant-scale">{event.icon}</span>
-                        <Badge variant="outline" className="text-accent border-accent elegant-border">
-                          {event.year}
-                        </Badge>
-                      </div>
-                      <h3 className="text-xl font-bold luxury-text mb-2">{event.title}</h3>
-                      <p className="text-muted-foreground mb-4">{event.description}</p>
-                      <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {event.period}
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
-                          {event.location}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+        <Card className="w-full max-w-3xl h-[40vh] max-h-[400px] bg-slate-800/60 border-white/20 backdrop-blur-lg flex flex-col">
+            <div className="flex-1 p-6 overflow-y-auto space-y-4">
+                <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 font-bold text-sm">AI</div>
+                    <div className="bg-slate-700 rounded-lg rounded-tl-none p-3 max-w-md">
+                        <p className="text-white/90">Xin chào! Tôi là AI Assistant. Bạn muốn hỏi điều gì về tương lai của công nghệ và con người?<span className="inline-block w-1 blinking-caret text-primary"></span></p>
+                    </div>
                 </div>
-
-                <div className="relative z-10">
-                  <div
-                    className={`w-6 h-6 rounded-full border-4 border-white transition-all duration-300 animate-luxury-glow ${
-                      selectedEvent === index ? "bg-accent scale-125" : "bg-secondary"
-                    }`}
-                  ></div>
+            </div>
+            <div className="p-4 border-t border-white/20 bg-slate-800/80">
+                <div className="relative">
+                    <input 
+                        type="text"
+                        placeholder="Nhập câu hỏi của bạn ở đây..."
+                        className="w-full bg-slate-700 border-slate-600 rounded-full py-3 pl-5 pr-16 text-white placeholder:text-slate-400 focus:ring-2 focus:ring-primary focus:outline-none"
+                    />
+                    <Button size="icon" className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full">
+                        <SendHorizonal className="w-5 h-5"/>
+                    </Button>
                 </div>
-
-                <div className="flex-1 px-8"></div>
-              </div>
-            ))}
-          </div>
-        </div>
+            </div>
+        </Card>
       </div>
-    </section>
-  )
+    </div>
+  );
 }
-
 
 ===== ./components/laws-horizontal-scroll-section.tsx =====
 // components/laws-horizontal-scroll-section.tsx
 "use client"
-
 import { useEffect, useRef, useState } from "react"
 import { Waves, TrendingUp, RefreshCw } from "lucide-react"
+import { Badge } from "./ui/badge";
 
 const laws = [
   {
     name: "Quy luật Mâu thuẫn",
     summary: "Nguồn Gốc Của Sự Vận Động",
-    description: "Mọi sự vật đều chứa đựng các mặt đối lập. Sự đấu tranh giữa chúng chính là nguồn gốc nội tại, tạo ra động lực cho mọi sự phát triển.",
+    description: "Mọi sự vật đều chứa đựng các mặt đối lập (thống nhất và đấu tranh). Chính sự đấu tranh giữa chúng là nguồn gốc nội tại, tạo ra động lực cho mọi sự phát triển.",
+    points: [
+      "Mâu thuẫn tồn tại khách quan, phổ biến.",
+      "Mâu thuẫn bên trong giữ vai trò quyết định.",
+      "Đấu tranh của các mặt đối lập là tuyệt đối."
+    ],
     icon: Waves,
-    color: "#3b82f6", // Blue
+    color: "#3b82f6",
   },
   {
     name: "Quy luật Lượng - Chất",
     summary: "Cách Thức Của Sự Phát Triển",
     description: "Sự phát triển bắt đầu bằng việc tích lũy dần về lượng. Khi đạt đến giới hạn 'điểm nút', một 'bước nhảy' về chất sẽ xảy ra, tạo ra sự vật mới.",
+    points: [
+      "Lượng là yếu tố động, thường xuyên thay đổi.",
+      "Chất là yếu tố ổn định, chỉ thay đổi khi có bước nhảy.",
+      "Cần tránh cả hai thái cực: nóng vội và bảo thủ."
+    ],
     icon: TrendingUp,
-    color: "#22c55e", // Green
+    color: "#22c55e",
   },
   {
     name: "Quy luật Phủ định của Phủ định",
     summary: "Khuynh Hướng Của Sự Phát Triển",
     description: "Sự phát triển diễn ra theo con đường xoáy ốc. Cái mới ra đời từ cái cũ, kế thừa những yếu tố tích cực và tiến lên một trình độ cao hơn.",
+    points: [
+      "Phủ định biện chứng mang tính khách quan và kế thừa.",
+      "Phát triển không phải là đường thẳng mà là xoáy ốc.",
+      "Cần có thái độ cởi mở, ủng hộ cái mới hợp quy luật."
+    ],
     icon: RefreshCw,
-    color: "#f59e0b", // Amber
+    color: "#f59e0b",
   },
 ]
 
@@ -287,23 +222,32 @@ export function LawsHorizontalScrollSection() {
           }
         });
       },
-      {
-        root: containerRef.current,
-        threshold: 0.7,
-      }
+      { root: containerRef.current, threshold: 0.7 }
     );
-
     const cards = Array.from(containerRef.current?.children || []);
     cards.forEach((card) => observer.observe(card));
-
-    return () => {
-      cards.forEach((card) => observer.unobserve(card));
-    };
+    return () => { cards.forEach((card) => observer.unobserve(card)); };
   }, []);
 
   return (
-    <section className="scroll-section bg-slate-900">
-      <div ref={containerRef} className="horizontal-scroll-container h-full w-full">
+    <section className="scroll-section relative">
+      
+      {/* Layer 1: Ảnh nền cố định */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/laws-background.jpg"
+          alt="Digital network background"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* ===== PHẦN CẬP NHẬT ===== */}
+      {/* Layer 2: Lớp phủ đã được giảm độ mờ và bỏ blur */}
+      <div className="absolute inset-0 z-10 bg-slate-900/60"></div>
+      {/* ========================== */}
+      
+      {/* Layer 3: Nội dung chính */}
+      <div ref={containerRef} className="horizontal-scroll-container h-full w-full relative z-20">
         {laws.map((law, index) => {
           const Icon = law.icon
           return (
@@ -311,139 +255,206 @@ export function LawsHorizontalScrollSection() {
               <Icon className="absolute w-1/2 h-1/2 text-white/5 opacity-50 blur-3xl" style={{ color: law.color }}/>
               <div className="card-content-wrapper max-w-4xl text-center text-white z-10">
                 <div className="inline-flex items-center gap-4 mb-8">
-                  <div className="p-4 rounded-full" style={{ backgroundColor: `${law.color}20` }}>
+                  <div className="p-4 rounded-xl bg-slate-800/50">
                     <Icon style={{ color: law.color }} className="w-8 h-8" />
                   </div>
                   <h2 className="text-3xl font-bold" style={{ color: law.color }}>
                     {law.name}
                   </h2>
                 </div>
-                <h3 className="text-5xl md:text-7xl font-black mb-6 text-balance luxury-text bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
+                <h3 className="text-5xl md:text-7xl font-black mb-6 text-balance bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">
                   {law.summary}
                 </h3>
-                <p className="text-xl md:text-2xl text-slate-300 leading-relaxed text-pretty">
+                <p className="text-xl md:text-2xl text-slate-300 leading-relaxed text-pretty mb-8">
                   {law.description}
                 </p>
+                <div className="flex flex-wrap justify-center gap-3">
+                    {laws[activeIndex].points.map((point, i) => (
+                        <Badge key={i} variant="outline" className="text-slate-300 border-slate-600 backdrop-blur-sm bg-white/5 text-base py-1 px-4">{point}</Badge>
+                    ))}
+                </div>
               </div>
             </div>
           )
         })}
       </div>
-
+      
+      {/* Dấu chấm chỉ báo tiến trình */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
         {laws.map((_, index) => (
-          <div
-            key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-500 ${
-              activeIndex === index ? 'scale-125 bg-white' : 'bg-white/30'
-            }`}
-          />
+          <div key={index} className={`w-3 h-3 rounded-full transition-all duration-500 ${ activeIndex === index ? 'scale-125 bg-white' : 'bg-white/30' }`} />
         ))}
       </div>
     </section>
   )
 }
 
-===== ./components/cta-section.tsx =====
-// components/cta-section.tsx
-"use client"
+===== ./components/examples-section.tsx =====
+// components/examples-section.tsx
+"use client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BookOpen, HeartPulse, Palette, TrendingUp } from "lucide-react";
 
-export function CTASection() {
-  return (
-    <section id="conclusion" className="py-20 bg-gradient-to-r from-accent to-secondary relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 border border-white rounded-full animate-float"></div>
-        <div className="absolute bottom-20 right-1/4 w-16 h-16 border border-white rounded-full animate-float animation-delay-800"></div>
-      </div>
-
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-6 animate-fade-in-up text-balance">
-            Kết Luận: Xu Hướng Phát Triển Tất Yếu
-          </h2>
-
-          <div className="space-y-6 text-xl text-white/90 text-pretty leading-relaxed">
-            <p className="animate-fade-in-up animation-delay-200">
-              Quan hệ giữa AI và con người là một <strong className="text-white">mâu thuẫn biện chứng</strong> vừa hợp tác vừa cạnh tranh. Sự phát triển của AI không làm con người “mất chỗ đứng”, mà thúc đẩy con người bước lên một tầm cao mới của trí tuệ và sáng tạo.
-            </p>
-            <p className="text-2xl font-semibold text-white/90 animate-fade-in-up animation-delay-400 luxury-text bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">
-              AI không phải là kẻ thù, cũng không chỉ là công cụ. AI là tấm gương phản chiếu sự sáng tạo vô hạn của con người, đồng thời là động lực thúc đẩy xã hội loài người phát triển theo con đường phủ định biện chứng, ngày càng tiến bộ, văn minh và nhân văn hơn.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-===== ./components/laws-section.tsx =====
-// components/laws-section.tsx
-"use client"
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Waves, TrendingUp, RefreshCw } from "lucide-react"
-
-const laws = [
-  {
-    name: "Quy luật Mâu thuẫn",
-    description: "Mọi sự vật đều chứa đựng các mặt đối lập, vừa thống nhất vừa đấu tranh. Chính sự đấu tranh bên trong là nguồn gốc làm sự vật vận động và phát triển.",
-    icon: Waves,
-    color: "from-blue-500 to-purple-500",
-  },
-  {
-    name: "Quy luật Lượng – Chất",
-    description: "Quá trình phát triển là sự tích lũy dần về lượng, đến điểm nút sẽ dẫn đến bước nhảy về chất, hình thành chất mới.",
-    icon: TrendingUp,
-    color: "from-green-500 to-teal-500",
-  },
-  {
-    name: "Quy luật Phủ định của Phủ định",
-    description: "Sự phát triển diễn ra theo con đường xoáy ốc, không lặp lại y nguyên nhưng có tính kế thừa, tạo ra cái mới ở trình độ cao hơn.",
-    icon: RefreshCw,
-    color: "from-amber-500 to-orange-500",
-  },
+const examples = [
+    {
+        title: "AI trong Giáo dục",
+        description: "ChatGPT hỗ trợ học sinh, tạo đề thi, nhưng cũng gây lo ngại về sự phụ thuộc và giảm tư duy tự nhiên.",
+        icon: BookOpen
+    },
+    {
+        title: "AI trong Y tế",
+        description: "Hỗ trợ chẩn đoán hình ảnh, phân tích dữ liệu lớn, nhưng có rủi ro sai lệch do dữ liệu huấn luyện thiên lệch (bias).",
+        icon: HeartPulse
+    },
+    {
+        title: "AI Sáng tạo",
+        description: "Viết nhạc, vẽ tranh, tạo kịch bản, ảnh hưởng trực tiếp đến công việc của nghệ sĩ, nhà báo và nhà thiết kế.",
+        icon: Palette
+    },
 ]
 
-export function LawsSection() {
+const comparisonData = [
+    {
+        criteria: "Tốc độ & Độ chính xác",
+        ai: "Rất nhanh, ít sai trong tác vụ lặp đi lặp lại.",
+        human: "Linh hoạt, có thể xử lý các tình huống bất ngờ."
+    },
+    {
+        criteria: "Sáng tạo & Trí tưởng tượng",
+        ai: "Mô phỏng dựa trên dữ liệu, thiếu ý tưởng đột phá.",
+        human: "Sáng tạo bản chất, đổi mới thực sự."
+    },
+    {
+        criteria: "Đạo đức & Trách nhiệm",
+        ai: "Phụ thuộc vào lập trình và kiểm soát của con người.",
+        human: "Có khả năng ra quyết định dựa trên giá trị nhân văn."
+    },
+    {
+        criteria: "Thích nghi",
+        ai: "Tốt nếu có dữ liệu và mô hình phù hợp.",
+        human: "Thích ứng linh hoạt với môi trường hoàn toàn mới."
+    }
+]
+
+export function ExamplesSection() {
   return (
-    <section id="laws-section" className="py-20 bg-gradient-to-b from-white to-slate-50">
-      <div className="container mx-auto px-6">
+    <section className="scroll-section w-full bg-background dark:bg-slate-950">
+      <div className="container mx-auto px-6 py-12">
         <div className="text-center mb-16">
-          <Badge className="mb-4 bg-secondary text-white">Lý Thuyết Nền Tảng</Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">3 Quy Luật Cơ Bản Của Phép Biện Chứng</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in-up">
-            Các quy luật này chỉ ra bản chất của sự vận động và phát triển: khách quan, kế thừa, thông qua mâu thuẫn và đấu tranh để tạo ra cái mới.
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Thực trạng & Ví dụ</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-pretty">
+            AI đang hiện diện trong mọi lĩnh vực, tạo ra cả cơ hội và thách thức.
           </p>
         </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {laws.map((law, index) => (
-            <Card
-              key={index}
-              className="group hover:scale-105 transition-all duration-300 hover:shadow-xl animate-fade-in-up border-0 overflow-hidden h-full flex flex-col"
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              <div className={`h-2 bg-gradient-to-r ${law.color}`}></div>
-              <CardHeader>
-                <div className="flex items-center gap-4 mb-2">
-                  <div className={`p-3 rounded-full bg-gradient-to-r ${law.color} text-white shadow-lg`}>
-                    <law.icon className="w-6 h-6" />
+        
+        {/* Ví dụ thực tế */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {examples.map((example, index) => {
+            const Icon = example.icon;
+            return (
+              <Card key={index} className="text-center p-4 border-2 hover:border-primary transition-all duration-300 hover:shadow-xl">
+                <CardHeader className="items-center">
+                  <div className="p-4 bg-primary/10 rounded-full mb-4">
+                    <Icon className="w-8 h-8 text-primary" />
                   </div>
-                  <CardTitle className="text-2xl text-foreground group-hover:text-accent transition-colors">
-                    {law.name}
-                  </CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground leading-relaxed">{law.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+                  <CardTitle className="text-2xl">{example.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">{example.description}</p>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+
+        {/* Bảng so sánh */}
+        <div className="bg-card p-8 rounded-2xl border">
+            <h3 className="text-3xl font-bold text-center mb-8">So sánh AI và Con người</h3>
+            <div className="overflow-x-auto">
+                <table className="w-full text-left table-auto">
+                    <thead>
+                        <tr className="border-b">
+                            <th className="p-4 text-lg font-semibold">Tiêu chí</th>
+                            <th className="p-4 text-lg font-semibold text-green-500">Ưu điểm của AI</th>
+                            <th className="p-4 text-lg font-semibold text-indigo-400">Ưu điểm của Con người</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {comparisonData.map((row, i) => (
+                            <tr key={i} className="border-b last:border-0">
+                                <td className="p-4 font-medium">{row.criteria}</td>
+                                <td className="p-4 text-muted-foreground">{row.ai}</td>
+                                <td className="p-4 text-muted-foreground">{row.human}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <p className="text-center mt-6 text-sm text-muted-foreground italic">
+              Thông tin tham khảo từ World Economic Forum.
+            </p>
         </div>
       </div>
     </section>
-  )
+  );
+}
+
+===== ./components/skills-section.tsx =====
+// components/skills-section.tsx
+"use client";
+import { Badge } from "@/components/ui/badge";
+import { BrainCircuit, Users, Sparkles, Goal, Network } from "lucide-react";
+import Image from "next/image";
+
+const skills = [
+    { name: "Tư duy phản biện & Giải quyết vấn đề", icon: BrainCircuit },
+    { name: "Sáng tạo & Đổi mới", icon: Sparkles },
+    { name: "Kỹ năng mềm (Giao tiếp, Đồng cảm)", icon: Users },
+    { name: "Học tập suốt đời & Thích ứng", icon: Goal },
+    { name: "Hiểu biết về AI & Đạo đức công nghệ", icon: Network },
+]
+
+export function SkillsSection() {
+    return (
+        <div className="scroll-section w-full bg-slate-50 dark:bg-gray-900">
+            <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div className="relative w-full h-80 md:h-2/3 rounded-2xl overflow-hidden shadow-2xl">
+                    <Image 
+                        src="/images/analysis-3.jpg"
+                        alt="Human skills in the age of AI"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
+                <div className="text-left">
+                    <Badge className="mb-4 animate-fade-in-up-stagger">Định hướng tương lai</Badge>
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance animate-fade-in-up-stagger [animation-delay:150ms]">
+                        Kỹ năng cần thiết cho Kỷ nguyên AI
+                    </h2>
+                    <p className="text-xl text-muted-foreground mb-8 text-pretty animate-fade-in-up-stagger [animation-delay:300ms]">
+                        Để không bị bỏ lại phía sau, con người cần tập trung vào những kỹ năng mà AI không thể dễ dàng thay thế.
+                    </p>
+                    <div className="space-y-4">
+                        {skills.map((skill, index) => {
+                            const Icon = skill.icon;
+                            return (
+                                <div 
+                                  key={index} 
+                                  className="flex items-center gap-4 p-4 rounded-lg bg-card border hover:shadow-md transition-shadow animate-fade-in-up-stagger"
+                                  style={{ animationDelay: `${450 + index * 100}ms` }}
+                                >
+                                    <Icon className="w-6 h-6 text-secondary flex-shrink-0" />
+                                    <span className="font-semibold text-lg">{skill.name}</span>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
 
 ===== ./components/hero-section.tsx =====
@@ -453,150 +464,42 @@ import { ChevronDown, Cpu } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="scroll-section w-full">
-      {/* Background Animation */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-slate-900 to-indigo-900 animate-aurora [animation-duration:20s]"></div>
-      <div className="absolute inset-0 bg-grid-white/[0.05]"></div>
-
-      <div className="container mx-auto px-6 text-center relative z-10">
+    <section className="scroll-section w-full relative">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/hero-background.jpg" 
+          alt="AI and Human Connection"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/80 via-background/50 to-transparent"></div>
+      
+      <div className="container mx-auto px-6 text-center relative z-20">
         <div className="max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full text-sm font-medium mb-8 animate-fade-in-up text-white border border-white/20">
-            <Cpu className="w-4 h-4 animate-pulse text-indigo-400" />
+          <div className="inline-flex items-center gap-3 bg-card/60 backdrop-blur-sm px-5 py-2.5 rounded-full text-sm font-semibold mb-8 animate-fade-in-up border">
+            <Cpu className="w-5 h-5 text-accent" />
             Góc nhìn từ phép biện chứng duy vật
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-white mb-6 animate-fade-in-up animation-delay-200 text-balance">
+          <h1 className="text-5xl md:text-7xl font-black text-foreground mb-6 animate-fade-in-up [animation-delay:200ms] text-balance">
             AI và Con người
-            <span className="block bg-gradient-to-r from-white via-indigo-300 to-white bg-clip-text text-transparent luxury-text">
+            <span className="block bg-gradient-to-r from-accent via-secondary to-accent bg-clip-text text-transparent mt-2">
               Đối tác hay Đối thủ?
             </span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/70 mb-8 animate-fade-in-up animation-delay-400 text-pretty max-w-3xl mx-auto leading-relaxed">
-            Sự phát triển nhanh chóng của trí tuệ nhân tạo đang làm thay đổi cách con người lao động, học tập và sáng tạo. Mối quan hệ này cần được nhìn nhận thế nào từ góc độ biện chứng?
+          {/* NỘI DUNG MỞ BÀI MỚI */}
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in-up [animation-delay:400ms] text-pretty max-w-3xl mx-auto leading-relaxed italic">
+            “Trong lúc ChatGPT có thể viết một bài thơ, Midjourney vẽ nên một bức tranh, AI trong y tế chẩn đoán bệnh... vậy người nghệ sĩ hay bác sĩ có nguy cơ bị thay thế? Mối quan hệ này thực sự là gì?”
           </p>
         </div>
       </div>
       
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20 flex flex-col items-center gap-1 text-white/70">
-        <p className="text-sm font-semibold">Khám phá</p>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-20 flex flex-col items-center gap-1 text-muted-foreground">
+        <p className="text-sm font-semibold">Phân tích chi tiết</p>
         <ChevronDown className="w-6 h-6" />
       </div>
     </section>
   );
 }
-
-===== ./components/features-section.tsx =====
-"use client"
-
-import { useEffect, useRef, useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Zap, Palette, Smartphone, Globe, Sparkles } from "lucide-react"
-
-const features = [
-  {
-    icon: Zap,
-    title: "Animation Mượt Mà",
-    description: "Các hiệu ứng chuyển động được tối ưu hóa cho trải nghiệm người dùng tốt nhất",
-  },
-  {
-    icon: Palette,
-    title: "Thiết Kế Hiện Đại",
-    description: "Giao diện đẹp mắt với màu sắc và typography được chọn lọc kỹ càng",
-  },
-  {
-    icon: Smartphone,
-    title: "Responsive Design",
-    description: "Hoạt động hoàn hảo trên mọi thiết bị từ mobile đến desktop",
-  },
-  {
-    icon: Globe,
-    title: "Tối Ưu Hiệu Suất",
-    description: "Tải nhanh và mượt mà với công nghệ web hiện đại nhất",
-  },
-]
-
-export function FeaturesSection() {
-  const [visibleItems, setVisibleItems] = useState<number[]>([])
-  const sectionRef = useRef<HTMLElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Number.parseInt(entry.target.getAttribute("data-index") || "0")
-            setVisibleItems((prev) => [...prev, index])
-          }
-        })
-      },
-      { threshold: 0.3 },
-    )
-
-    const cards = sectionRef.current?.querySelectorAll("[data-index]")
-    cards?.forEach((card) => observer.observe(card))
-
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <section id="features" ref={sectionRef} className="py-20 relative overflow-hidden">
-      <div className="absolute inset-0 premium-gradient opacity-50"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-muted/50 to-background/90"></div>
-
-      <div className="absolute top-20 right-10 w-32 h-32 bg-gradient-to-br from-accent/20 to-secondary/20 rounded-full blur-xl animate-float"></div>
-      <div className="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-full blur-xl animate-particle-float"></div>
-
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 glass-effect px-4 py-2 rounded-full text-sm font-medium mb-6 text-accent">
-            <Sparkles className="w-4 h-4 animate-pulse" />
-            Tính năng đặc biệt
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 animate-fade-in-up bg-gradient-to-r from-foreground via-accent to-foreground bg-clip-text text-transparent">
-            Tính Năng Nổi Bật
-          </h2>
-          <p className="text-xl text-muted-foreground animate-fade-in-up animation-delay-200 text-pretty max-w-2xl mx-auto leading-relaxed">
-            Những điều làm nên sự khác biệt của chúng tôi
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              data-index={index}
-              className={`group hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 glass-effect border-accent/20 relative overflow-hidden ${
-                visibleItems.includes(index)
-                  ? index % 2 === 0
-                    ? "animate-slide-in-left"
-                    : "animate-slide-in-right"
-                  : "opacity-0"
-              }`}
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-              <CardContent className="p-6 text-center relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-accent/20 to-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent to-secondary opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full"></div>
-                  <feature.icon className="w-8 h-8 text-accent group-hover:text-white transition-colors duration-300 relative z-10" />
-                </div>
-
-                <h3 className="text-xl font-bold text-card-foreground mb-2 group-hover:text-accent transition-colors duration-300">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground text-pretty leading-relaxed group-hover:text-card-foreground/80 transition-colors duration-300">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 
 ===== ./components/analysis-section.tsx =====
 // components/analysis-section.tsx
@@ -663,334 +566,324 @@ export function AnalysisSection() {
   );
 }
 
-===== ./components/key-figures-section.tsx =====
-// components/key-figures-section.tsx
-"use client"
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-
-const analyses = [
-  {
-    law: "Theo Quy luật Mâu thuẫn",
-    title: "Động Lực Thúc Đẩy",
-    description: "AI (tốc độ, tự động hóa) và con người (sáng tạo, đạo đức) là hai mặt đối lập. Chúng vừa thống nhất (AI phục vụ con người), vừa đấu tranh (AI cạnh tranh việc làm). Mâu thuẫn này chính là động lực buộc con người phải thích ứng, đổi mới và phát triển.",
-  },
-  {
-    law: "Theo Quy luật Lượng – Chất",
-    title: "Bước Nhảy Về Chất",
-    description: "Ban đầu, AI chỉ hỗ trợ (thay đổi về lượng). Khi AI có thể tự sáng tạo (viết văn, vẽ tranh), đó là một 'bước nhảy' về chất. Lao động thay đổi bản chất, con người chuyển từ vai trò thực thi sang quản trị và sáng tạo ở tầng cao hơn.",
-  },
-  {
-    law: "Theo Quy luật Phủ định",
-    title: "Phát Triển Xoáy Ốc",
-    description: "AI không xóa bỏ con người mà kế thừa tri thức để phủ định các hình thức lao động cũ. Quá trình này diễn ra theo đường xoáy ốc: Con người tạo ra AI → AI thay đổi con người → Con người lại cải tiến AI, tạo ra một xã hội ở tầm cao mới.",
-  },
-]
-
-export function KeyFiguresSection() {
-  return (
-    <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <Badge className="mb-4 bg-accent text-white">Vận Dụng Phân Tích</Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">Phân Tích Mối Quan Hệ Giữa AI và Con Người</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Áp dụng các quy luật biện chứng để làm sáng tỏ bản chất và xu hướng của mối quan hệ phức tạp này.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {analyses.map((analysis, index) => (
-            <Card
-              key={index}
-              className="group hover:scale-105 transition-all duration-300 hover:shadow-xl animate-fade-in-up border-0 overflow-hidden h-full"
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              <CardHeader>
-                <Badge className="mb-3 w-fit">{analysis.law}</Badge>
-                <CardTitle className="text-2xl text-foreground group-hover:text-accent transition-colors">
-                  {analysis.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">{analysis.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-===== ./components/testimonials-section.tsx =====
-"use client"
-
-import { useState, useEffect } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Star } from "lucide-react"
-
-const testimonials = [
-  {
-    name: "Nguyễn Văn A",
-    role: "CEO, Tech Startup",
-    content: "Animation tuyệt vời! Trang web của chúng tôi trở nên sống động và thu hút hơn rất nhiều.",
-    rating: 5,
-    avatar: "/professional-man-avatar.png",
-  },
-  {
-    name: "Trần Thị B",
-    role: "Designer",
-    content: "Thiết kế hiện đại và chuyên nghiệp. Khách hàng của tôi rất hài lòng với kết quả.",
-    rating: 5,
-    avatar: "/professional-woman-avatar.png",
-  },
-  {
-    name: "Lê Minh C",
-    role: "Marketing Manager",
-    content: "Tỷ lệ chuyển đổi tăng 40% sau khi sử dụng. Đầu tư rất đáng giá!",
-    rating: 5,
-    avatar: "/business-man-avatar.png",
-  },
-]
-
-export function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <section id="testimonials" className="py-20 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-foreground mb-4 animate-fade-in-up">Khách Hàng Nói Gì</h2>
-          <p className="text-xl text-muted-foreground animate-fade-in-up animation-delay-200 text-pretty max-w-2xl mx-auto">
-            Những phản hồi tích cực từ khách hàng của chúng tôi
-          </p>
-        </div>
-
-        <div className="max-w-4xl mx-auto">
-          <div className="relative overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="w-full flex-shrink-0 px-4">
-                  <Card className="border-border/50 shadow-lg">
-                    <CardContent className="p-8 text-center">
-                      <div className="flex justify-center mb-4">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                        ))}
-                      </div>
-                      <p className="text-lg text-card-foreground mb-6 italic text-pretty">"{testimonial.content}"</p>
-                      <div className="flex items-center justify-center gap-4">
-                        <img
-                          src={testimonial.avatar || "/placeholder.svg"}
-                          alt={testimonial.name}
-                          className="w-12 h-12 rounded-full"
-                        />
-                        <div>
-                          <h4 className="font-bold text-card-foreground">{testimonial.name}</h4>
-                          <p className="text-muted-foreground text-sm">{testimonial.role}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-center mt-8 gap-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-accent scale-125" : "bg-border hover:bg-accent/50"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-
-===== ./components/conclusion-section.tsx =====
-// components/conclusion-section.tsx
+===== ./components/dot-navigation.tsx =====
+// components/dot-navigation.tsx
 "use client";
-import { Sparkles } from "lucide-react";
 
-export function ConclusionSection() {
+import { useState, useEffect } from 'react';
+
+const sections = [
+    { id: 'hero', label: 'Mở đầu' },
+    { id: 'laws', label: 'Lý thuyết' },
+    { id: 'examples', label: 'Ví dụ' },
+    { id: 'ethics', label: 'Đạo đức' },
+    { id: 'skills', label: 'Kỹ năng' },
+    { id: 'chatbot', label: 'Chatbot' },
+    { id: 'conclusion', label: 'Kết luận' },
+];
+
+export function DotNavigation() {
+    const [activeSection, setActiveSection] = useState('hero');
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            },
+            { root: document.querySelector('.scroll-container'), threshold: 0.5 }
+        );
+
+        sections.forEach(section => {
+            const el = document.getElementById(section.id);
+            if (el) observer.observe(el);
+        });
+
+        return () => {
+            sections.forEach(section => {
+                const el = document.getElementById(section.id);
+                if (el) observer.unobserve(el);
+            });
+        };
+    }, []);
+
+    return (
+        <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-50">
+            <ul className="flex flex-col items-center gap-4">
+                {sections.map(section => (
+                    <li key={section.id} className="group">
+                        <a 
+                            href={`#${section.id}`}
+                            className={`block w-3 h-3 rounded-full bg-white/50 transition-all duration-300
+                                ${activeSection === section.id ? 'scale-150 bg-white' : 'hover:scale-125 hover:bg-white'}`}
+                        >
+                            <span className="sr-only">{section.label}</span>
+                        </a>
+                        <div className="absolute right-full top-1/2 -translate-y-1/2 mr-4 px-3 py-1 bg-slate-800 text-white text-sm rounded-md
+                                       opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
+                            {section.label}
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+    );
+}
+
+===== ./components/ethics-section.tsx =====
+// components/ethics-section.tsx
+"use client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ShieldCheck, Lock, Users, GitBranch, Scale } from "lucide-react";
+
+const ethicsIssues = [
+  {
+    title: "Quyền riêng tư & Dữ liệu",
+    description: "Dữ liệu cá nhân có nguy cơ bị lạm dụng hoặc lộ ra ngoài nếu không được bảo vệ đúng cách.",
+    icon: Lock,
+  },
+  {
+    title: "Thiên lệch & Phân biệt đối xử",
+    description: "AI có thể đưa ra quyết định bất công nếu được huấn luyện trên dữ liệu có sẵn sự thiên vị.",
+    icon: Users,
+  },
+  {
+    title: "Minh bạch & Giải thích được",
+    description: "Cần phải hiểu tại sao AI đưa ra một quyết định cụ thể, đặc biệt trong các lĩnh vực quan trọng.",
+    icon: GitBranch,
+  },
+  {
+    title: "Trách nhiệm & Pháp lý",
+    description: "Khi AI gây ra lỗi, việc xác định ai (nhà phát triển, người dùng) chịu trách nhiệm là rất phức tạp.",
+    icon: Scale,
+  },
+];
+
+export function EthicsSection() {
   return (
-    <section className="scroll-section dark w-full bg-gradient-to-br from-accent/90 to-secondary">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 border-2 border-white rounded-full animate-float [animation-delay:-1s]"></div>
-        <div className="absolute bottom-20 right-1/4 w-24 h-24 border border-white rounded-full animate-float [animation-delay:-3s]"></div>
-        <div className="absolute top-1/2 left-1/3 w-16 h-16 border-2 border-white rounded-full animate-float"></div>
-      </div>
-      <div className="container mx-auto text-center relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-8 animate-fade-in-up text-balance">
-            Kết Luận: Xu Hướng Phát Triển Tất Yếu
+    <section className="scroll-section dark text-white w-full bg-slate-900">
+      <div className="absolute inset-0 bg-grid-white/[0.05]"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-900/90 to-slate-900"></div>
+      
+      <div className="container mx-auto relative z-10 px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Vấn đề Đạo đức & Xã hội
           </h2>
-          <div className="space-y-8 text-xl text-white/90 text-pretty leading-relaxed">
-            <p className="animate-fade-in-up [animation-delay:200ms]">
-              Quan hệ giữa AI và con người là một <strong className="font-bold text-white">mâu thuẫn biện chứng</strong>. Sự phát triển của AI không làm con người “mất chỗ đứng”, mà thúc đẩy con người bước lên một <strong className="font-bold text-white">tầm cao mới của trí tuệ và sáng tạo</strong>.
-            </p>
-            <div className="animate-fade-in-up [animation-delay:400ms]">
-              <div className="inline-block p-6 rounded-xl glass-effect">
-                 <div className="flex items-start text-left gap-4">
-                    <Sparkles className="w-10 h-10 mt-1 text-amber-300 flex-shrink-0" />
-                    <p className="text-2xl font-semibold text-white luxury-text bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">
-                      AI là tấm gương phản chiếu sự sáng tạo vô hạn của con người, và là động lực thúc đẩy xã hội ngày càng tiến bộ, văn minh và nhân văn hơn.
-                    </p>
-                 </div>
-              </div>
-            </div>
-          </div>
+          <p className="text-xl text-white/70 max-w-3xl mx-auto text-pretty">
+            Sự phát triển của AI đặt ra những câu hỏi quan trọng về giá trị và trách nhiệm của con người.
+          </p>
         </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {ethicsIssues.map((issue, index) => {
+            const Icon = issue.icon;
+            return (
+              <Card
+                key={index}
+                className="group sophisticated-hover border-white/10 bg-white/5 h-full text-left p-2"
+              >
+                <CardHeader>
+                  <div className="mb-4">
+                    <Icon className="w-10 h-10 text-accent group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <CardTitle className="text-2xl text-white group-hover:text-accent transition-colors duration-300">
+                    {issue.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-white/70 leading-relaxed">{issue.description}</p>
+                </CardContent>
+              </Card>
+            )
+          })}
+        </div>
+        <p className="text-center mt-12 text-sm text-white/50 italic">
+          Các nguyên tắc chính cần tuân thủ: Công bằng (Fairness), Minh bạch (Transparency), Trách nhiệm (Accountability), và Bảo vệ dữ liệu (Data Privacy).
+        </p>
       </div>
     </section>
   );
 }
 
-===== ./components/historical-periods-section.tsx =====
-// components/historical-periods-section.tsx
+===== ./components/analysis-horizontal-scroll-section.tsx =====
+// components/analysis-horizontal-scroll-section.tsx
 "use client"
+import { useEffect, useRef, useState } from "react"
+import { Badge } from "./ui/badge";
+import Image from "next/image";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Waves, TrendingUp, RefreshCw } from "lucide-react"
-
-const laws = [
+const analyses = [
   {
-    name: "Quy luật Mâu thuẫn",
-    summary: "Nguồn gốc của sự phát triển",
-    description: "Mọi sự vật đều chứa đựng các mặt đối lập, vừa thống nhất vừa đấu tranh. Chính sự đấu tranh là nguồn gốc nội tại của mọi sự vận động.",
-    icon: Waves,
-    color: "text-blue-500",
-    borderColor: "border-blue-500/20",
-    hoverBorderColor: "hover:border-blue-500/50"
+    law: "Theo Quy luật Mâu thuẫn",
+    title: "Động Lực Thúc Đẩy",
+    description: "AI (tốc độ, tự động hóa) và con người (sáng tạo, đạo đức) là hai mặt đối lập. Chúng vừa thống nhất (AI là sản phẩm phục vụ con người), vừa đấu tranh (AI cạnh tranh việc làm, thách thức vai trò sáng tạo). Chính mâu thuẫn này là động lực buộc con người phải thích ứng, đổi mới và phát triển.",
+    imageUrl: "/images/analysis-1.jpg",
+    points: [ "AI là sản phẩm của con người", "Vừa hợp tác, vừa cạnh tranh", "Tạo động lực phát triển mới"]
   },
   {
-    name: "Quy luật Lượng - Chất",
-    summary: "Cách thức của sự phát triển",
-    description: "Sự phát triển là sự tích lũy dần về lượng, khi đến 'điểm nút' sẽ dẫn đến 'bước nhảy' về chất, tạo ra sự vật mới với chất mới.",
-    icon: TrendingUp,
-    color: "text-green-500",
-    borderColor: "border-green-500/20",
-    hoverBorderColor: "hover:border-green-500/50"
+    law: "Theo Quy luật Lượng - Chất",
+    title: "Bước Nhảy Về Chất",
+    description: "Ban đầu, AI chỉ hỗ trợ xử lý dữ liệu (thay đổi về lượng). Khi AI có thể tự sáng tạo (viết văn, vẽ tranh), đó là một 'bước nhảy' về chất. Lao động thay đổi bản chất, con người chuyển từ vai trò thực thi sang quản trị và sáng tạo ở tầng cao hơn.",
+    imageUrl: "/images/analysis-2.jpg",
+    points: ["Tích lũy lượng -> Bước nhảy chất", "Thay đổi bản chất lao động", "Nhiều ngành nghề mới xuất hiện"]
   },
   {
-    name: "Quy luật Phủ định",
-    summary: "Khuynh hướng của sự phát triển",
-    description: "Sự phát triển diễn ra theo đường xoáy ốc. Cái mới ra đời từ cái cũ, kế thừa các yếu tố tích cực và tiến lên một trình độ cao hơn.",
-    icon: RefreshCw,
-    color: "text-amber-500",
-    borderColor: "border-amber-500/20",
-    hoverBorderColor: "hover:border-amber-500/50"
+    law: "Theo Quy luật Phủ định",
+    title: "Phát Triển Xoáy Ốc",
+    description: "AI không xóa bỏ con người mà kế thừa tri thức để phủ định các hình thức lao động cũ. Quá trình này diễn ra theo đường xoáy ốc: Con người tạo ra AI → AI thay đổi con người → Con người lại cải tiến AI, tạo ra một xã hội ở tầm cao mới, văn minh hơn.",
+    imageUrl: "/images/analysis-3.jpg",
+    points: ["Phủ định có kế thừa", "Phát triển theo đường xoáy ốc", "Tạo ra xã hội ở tầm cao mới"]
   },
 ]
 
-export function HistoricalPeriodsSection() {
-  return (
-    <section className="scroll-section w-full bg-gradient-to-b from-background to-slate-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <Badge className="mb-4 bg-primary text-primary-foreground">Nền Tảng Lý Thuyết</Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">3 Quy Luật Cơ Bản Của Phép Biện Chứng</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Các quy luật này chỉ ra bản chất của sự vận động: khách quan, kế thừa, và thông qua mâu thuẫn để tạo ra cái mới.
-          </p>
-        </div>
+export function AnalysisHorizontalScrollSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {laws.map((law, index) => (
-            <Card
-              key={index}
-              className={`group transition-all duration-300 animate-fade-in-up h-full flex flex-col bg-card/50 backdrop-blur-sm border ${law.borderColor} ${law.hoverBorderColor} hover:shadow-2xl hover:shadow-slate-300/30 hover:-translate-y-2`}
-              style={{ animationDelay: `${index * 200}ms` }}
-            >
-              <CardHeader className="flex-row items-center gap-4">
-                <div className={`p-3 rounded-lg bg-white border shadow-sm`}>
-                  <law.icon className={`w-6 h-6 ${law.color}`} />
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting) {
+            target.classList.add("is-visible");
+            const index = parseInt(target.getAttribute('data-index') || '0', 10);
+            setActiveIndex(index);
+          } else {
+            target.classList.remove("is-visible");
+          }
+        });
+      },
+      { root: containerRef.current, threshold: 0.6 }
+    );
+    const cards = Array.from(containerRef.current?.children || []);
+    cards.forEach((card) => observer.observe(card));
+    return () => { cards.forEach((card) => observer.unobserve(card)); };
+  }, []);
+
+  return (
+    <section className="scroll-section relative">
+      
+      {/* Layer 1: Ảnh nền cố định */}
+      <div className="absolute inset-0 z-0">
+          <img
+              src="/analysis-background.jpg"
+              alt="Abstract office background"
+              className="w-full h-full object-cover"
+          />
+      </div>
+
+      {/* ===== PHẦN CẬP NHẬT ===== */}
+      {/* Layer 2: Lớp phủ trắng đã giảm độ mờ và bỏ blur */}
+      <div className="absolute inset-0 z-10 bg-white/50"></div>
+      {/* ========================== */}
+
+      {/* Layer 3: Nội dung chính */}
+      <div ref={containerRef} className="horizontal-scroll-container h-full w-full relative z-20">
+        {analyses.map((analysis, index) => (
+          <div key={index} className="horizontal-card" data-index={index}>
+            <div className="card-content-wrapper w-full h-full">
+              <div className="container mx-auto grid md:grid-cols-2 items-center gap-12 h-full">
+                {/* Cột hình ảnh */}
+                <div className="w-full h-1/2 md:h-2/3 relative rounded-2xl overflow-hidden shadow-2xl">
+                    <Image
+                        src={analysis.imageUrl}
+                        alt={analysis.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                 </div>
-                <div>
-                  <CardTitle className={`text-xl font-bold text-foreground`}>
-                    {law.name}
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground">{law.summary}</p>
+                {/* Cột nội dung */}
+                <div className="text-left">
+                  <Badge className="mb-4" variant="secondary">{analysis.law}</Badge>
+                  <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
+                    {analysis.title}
+                  </h2>
+                  <p className="text-lg text-muted-foreground leading-relaxed text-pretty mb-8">
+                    {analysis.description}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                      {analyses[activeIndex].points.map((point, i) => (
+                          <Badge key={i} variant="outline" className="text-base py-1 px-4">{point}</Badge>
+                      ))}
+                  </div>
                 </div>
-              </CardHeader>
-              <CardContent className="flex-grow pt-0">
-                <p className="text-muted-foreground leading-relaxed">{law.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Dấu chấm chỉ báo tiến trình */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        {analyses.map((_, index) => (
+          <div key={index} className={`w-3 h-3 rounded-full transition-all duration-500 ${ activeIndex === index ? 'scale-125 bg-primary' : 'bg-border' }`} />
+        ))}
       </div>
     </section>
   )
 }
 
-===== ./components/navigation.tsx =====
-"use client"
+===== ./components/conclusion-section.tsx =====
+// components/conclusion-section.tsx
+"use client";
+import { Users, Flag } from "lucide-react";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-
-export function Navigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
+export function ConclusionSection() {
   return (
-    <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-primary animate-fade-in-up">✨ AnimateLand</div>
-          <div className="hidden md:flex items-center space-x-8 animate-fade-in-up animation-delay-200">
-            <a href="#features" className="text-foreground hover:text-accent transition-colors duration-300">
-              Tính năng
-            </a>
-            <a href="#testimonials" className="text-foreground hover:text-accent transition-colors duration-300">
-              Đánh giá
-            </a>
-            <a href="#contact" className="text-foreground hover:text-accent transition-colors duration-300">
-              Liên hệ
-            </a>
+    <div className="scroll-section dark relative text-white">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/conclusion-background.jpg"
+          alt="Futuristic digital landscape"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="absolute inset-0 z-10 bg-slate-900/70"></div>
+      
+      <div className="container mx-auto text-center relative z-30 px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-8 animate-fade-in-up text-balance">
+            Kết Luận & Hướng Đi
+          </h2>
+          <div className="space-y-8 text-xl text-white/90 text-pretty leading-relaxed">
+            <p className="animate-fade-in-up [animation-delay:200ms]">
+              AI không phải kẻ thù, mà là một công cụ và động lực mạnh mẽ để con người tiến hóa. Mối quan hệ này là một <strong className="text-white">mâu thuẫn biện chứng</strong>, thúc đẩy chúng ta vươn lên tầm cao mới về trí tuệ và sáng tạo.
+            </p>
+            
+            <div className="animate-fade-in-up [animation-delay:400ms] space-y-4 text-left">
+                <div className="p-5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-start gap-4">
+                    <Flag className="w-8 h-8 mt-1 text-accent flex-shrink-0" />
+                    <div>
+                        <h3 className="font-bold text-white mb-1">Học tập & Nâng cao kỹ năng</h3>
+                        <p className="text-white/80">Liên tục trau dồi kỹ năng mềm, tư duy phản biện và hiểu biết về công nghệ.</p>
+                    </div>
+                </div>
+                 <div className="p-5 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 flex items-start gap-4">
+                    <Users className="w-8 h-8 mt-1 text-accent flex-shrink-0" />
+                    <div>
+                        <h3 className="font-bold text-white mb-1">Xây dựng môi trường hợp tác</h3>
+                        <p className="text-white/80">Nâng cao nhận thức đạo đức, tham gia xây dựng quy định để phát triển AI vì lợi ích chung.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="animate-fade-in-up [animation-delay:600ms] pt-4">
+               <p className="text-2xl font-semibold italic bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent animated-gradient">
+                  "Nếu AI ngày mai có thể làm hầu hết công việc của bạn, bạn muốn bản thân làm gì để vẫn có giá trị?"
+                </p>
+            </div>
           </div>
-          <Button className="animate-fade-in-up animation-delay-400 hover:scale-105 transition-transform duration-300">
-            Bắt đầu ngay
-          </Button>
         </div>
       </div>
-    </nav>
-  )
+    </div>
+  );
 }
-
 
 ===== ./components/ui/card.tsx =====
 import * as React from "react"
@@ -1200,7 +1093,7 @@ export function cn(...inputs: ClassValue[]) {
   --secondary: #6366f1;
   --secondary-foreground: #ffffff;
   --muted: #f8fafc;
-  --muted-foreground: #1f2937;
+  --muted-foreground: #6b7280;
   --accent: #6366f1;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
@@ -1208,55 +1101,30 @@ export function cn(...inputs: ClassValue[]) {
   --border: #e5e7eb;
   --input: #f8fafc;
   --ring: rgba(99, 102, 241, 0.5);
-  --chart-1: #6366f1;
-  --chart-2: #4f46e5;
-  --chart-3: #4338ca;
-  --chart-4: #3730a3;
-  --chart-5: #312e81;
-  --radius: 0.5rem;
-  --sidebar: #1f2937;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #374151;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #6366f1;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: rgba(99, 102, 241, 0.5);
+  --radius: 0.75rem;
 }
 
 .dark {
-  --background: #1f2937;
-  --foreground: #ffffff;
-  --card: #374151;
-  --card-foreground: #ffffff;
-  --popover: #374151;
-  --popover-foreground: #ffffff;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
+  --background: #111827;
+  --foreground: #f9fafb;
+  --card: #1f2937;
+  --card-foreground: #f9fafb;
+  --popover: #1f2937;
+  --popover-foreground: #f9fafb;
+  --primary: #818cf8;
+  --primary-foreground: #111827;
   --secondary: #4f46e5;
-  --secondary-foreground: #ffffff;
-  --muted: #374151;
-  --muted-foreground: #ffffff;
-  --accent: #6366f1;
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #4b5563;
-  --input: #374151;
-  --ring: rgba(99, 102, 241, 0.5);
-  --chart-1: #6366f1;
-  --chart-2: #4f46e5;
-  --chart-3: #4338ca;
-  --chart-4: #3730a3;
-  --chart-5: #312e81;
-  --sidebar: #374151;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #4f46e5;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: #4b5563;
-  --sidebar-ring: rgba(99, 102, 241, 0.5);
+  --secondary-foreground: #f9fafb;
+  --muted: #1f2937;
+  --muted-foreground: #9ca3af;
+  --accent: #818cf8;
+  --accent-foreground: #111827;
+  --destructive: #f87171;
+  --destructive-foreground: #111827;
+  --border: #374151;
+  --input: #1f2937;
+  --ring: #818cf8;
+  --radius: 0.75rem;
 }
 
 @theme inline {
@@ -1282,28 +1150,15 @@ export function cn(...inputs: ClassValue[]) {
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
@@ -1330,8 +1185,9 @@ export function cn(...inputs: ClassValue[]) {
 /* === PHẦN CSS NÂNG CẤP CUỐI CÙNG (ĐÃ SỬA LỖI) === */
 
 /* Tắt thanh cuộn mặc định của body */
-body {
+body, html {
   overflow: hidden;
+  height: 100%;
 }
 
 html {
@@ -1353,6 +1209,7 @@ html {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 1.5rem;
 }
 
 /* 2. Container cuộn NGANG cho phần Laws */
@@ -1400,37 +1257,44 @@ html {
 .horizontal-card.is-visible .card-content-wrapper {
   animation: contentFadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
 }
+@keyframes subtle-zoom-in-out {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05); /* Phóng to 5% */
+  }
+}
+
+.animate-subtle-zoom {
+  animation: subtle-zoom-in-out 15s ease-in-out infinite; /* Thời gian animation là 15 giây */
+}
 
 ===== ./app/page.tsx =====
 // app/page.tsx
 import { HeroSection } from "@/components/hero-section";
 import { LawsHorizontalScrollSection } from "@/components/laws-horizontal-scroll-section";
-import { AnalysisSection } from "@/components/analysis-section";
+import { ExamplesSection } from "@/components/examples-section";
+import { EthicsSection } from "@/components/ethics-section";
+import { SkillsSection } from "@/components/skills-section";
+import { ChatbotSection } from "@/components/chatbot-section";
 import { ConclusionSection } from "@/components/conclusion-section";
-import { HistoricalPeriodsSection } from "@/components/historical-periods-section";
+import { DotNavigation } from "@/components/dot-navigation";
 
 export default function Home() {
   return (
-    <main>
-      {/* 
-        Container này cho phép cuộn toàn màn hình từng section.
-        Mỗi component con là một "scroll-section" chiếm 100vh.
-      */}
+    <>
+      <DotNavigation />
       <div className="scroll-container">
-        <HeroSection />
-        <LawsHorizontalScrollSection />
-        <AnalysisSection />
-        <ConclusionSection />
+        <section id="hero"><HeroSection /></section>
+        <section id="laws"><LawsHorizontalScrollSection /></section>
+        <section id="examples"><ExamplesSection /></section>
+        <section id="ethics"><EthicsSection /></section>
+        <section id="skills"><SkillsSection /></section>
+        <section id="chatbot"><ChatbotSection /></section>
+        <section id="conclusion"><ConclusionSection /></section>
       </div>
-
-      {/* 
-        Phần nội dung thêm, không nằm trong hiệu ứng cuộn toàn màn hình.
-        Bạn có thể đặt các section truyền thống ở đây nếu muốn.
-        Ví dụ: Tôi đã tạo một section để trình bày lại 3 quy luật 
-        theo dạng lưới tĩnh để dễ đọc hơn.
-      */}
-      <HistoricalPeriodsSection />
-    </main>
+    </>
   );
 }
 
@@ -1466,18 +1330,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     tsconfig.json
     next-env.d.ts
     components/
-        timeline-section.tsx
+        chatbot-section.tsx
         laws-horizontal-scroll-section.tsx
-        cta-section.tsx
-        laws-section.tsx
+        examples-section.tsx
+        skills-section.tsx
         hero-section.tsx
-        features-section.tsx
         analysis-section.tsx
-        key-figures-section.tsx
-        testimonials-section.tsx
+        dot-navigation.tsx
+        ethics-section.tsx
+        analysis-horizontal-scroll-section.tsx
         conclusion-section.tsx
-        historical-periods-section.tsx
-        navigation.tsx
         ui/
             card.tsx
             badge.tsx
@@ -1489,6 +1351,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         page.tsx
         layout.tsx
     public/
-        professional-man-avatar.png
-        business-man-avatar.png
-        professional-woman-avatar.png
+        chatbot-background.jpg
+        analysis-background.jpg
+        hero-background.jpg
+        laws-background.jpg
+        conclusion-background.jpg
+        images/
+            analysis-2.jpg
+            analysis-1.jpg
+            analysis-3.jpg

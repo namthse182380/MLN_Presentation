@@ -7,7 +7,13 @@ export function HeroSection() {
     <section className="scroll-section w-full relative">
       <ParallaxBackground src="/hero-background.jpg" alt="AI and Human Connection" />
       
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+      {/* 
+        --- PHẦN CẬP NHẬT ---
+        Lớp phủ đã được giảm độ mờ để ảnh nền rõ hơn.
+        - "from-background/90": Lớp nền ở dưới cùng chỉ che 90% (thay vì 100%).
+        - "via-background/60": Lớp nền ở giữa chỉ che 60% (thay vì 80%).
+      */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-background/90 via-background/60 to-transparent"></div>
       
       <div className="container text-center relative z-20">
         <div className="max-w-4xl mx-auto">

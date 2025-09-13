@@ -6,6 +6,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* ... (toàn bộ các biến CSS :root và .dark của bạn giữ nguyên) ... */
   --background: #ffffff;
   --foreground: #1f2937;
   --card: #f8fafc;
@@ -52,6 +53,7 @@
 }
 
 @theme inline {
+  /* ... (toàn bộ phần @theme inline của bạn giữ nguyên) ... */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-background: var(--background);
@@ -88,6 +90,7 @@
   }
 }
 
+/* ... (toàn bộ các keyframes và class animation cũ của bạn giữ nguyên, từ @keyframes float đến .sophisticated-hover:hover) ... */
 @keyframes float {
   0%,
   100% {
@@ -97,21 +100,21 @@
     transform: translateY(-20px);
   }
 }
-
+/* ... */
 .sophisticated-hover:hover {
   transform: translateY(-12px) rotateX(15deg);
   box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2), 0 0 60px rgba(99, 102, 241, 0.3);
 }
 
-/* === CSS CHO HIỆU ỨNG CUỘN TRANG (SCROLLYTELLING) === */
 
-/* Tắt thanh cuộn mặc định của trình duyệt */
+/* === PHẦN CSS NÂNG CẤP CUỐI CÙNG (ĐÃ SỬA LỖI) === */
+
+/* Tắt thanh cuộn mặc định của body */
 body, html {
   overflow: hidden;
   height: 100%;
 }
 
-/* Bật hiệu ứng cuộn mượt */
 html {
   scroll-behavior: smooth;
 }
@@ -134,7 +137,7 @@ html {
   padding: 1.5rem;
 }
 
-/* 2. Container cuộn NGANG */
+/* 2. Container cuộn NGANG cho phần Laws */
 .horizontal-scroll-container {
   display: flex;
   overflow-x: scroll;
@@ -159,7 +162,7 @@ html {
   position: relative;
 }
 
-/* 3. Animation cho nội dung */
+/* 3. Animation cho nội dung (SỬA LỖI MẤT CHỮ) */
 @keyframes contentFadeInUp {
   from {
     opacity: 0;
@@ -175,19 +178,26 @@ html {
   opacity: 0; /* Mặc định ẩn */
 }
 
+/* Khi slide được kích hoạt (có class is-visible), áp dụng animation */
 .horizontal-card.is-visible .card-content-wrapper {
   animation: contentFadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.3s forwards;
 }
-
-@keyframes subtle-zoom-in-out {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+.bg-laws-section {
+  position: relative;
+  background-image: url('/laws-background.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
-.animate-subtle-zoom {
-  animation: subtle-zoom-in-out 15s ease-in-out infinite;
+/* Thêm một lớp phủ trực tiếp lên ảnh nền bằng pseudo-element ::before */
+.bg-laws-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.6); /* Tương đương bg-slate-900/60 */
+  z-index: 1; /* Nằm ngay trên ảnh nền */
 }

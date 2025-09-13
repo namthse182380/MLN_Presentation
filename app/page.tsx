@@ -1,6 +1,7 @@
 // app/page.tsx
 import { HeroSection } from "@/components/hero-section";
-import { AnalysisHorizontalScrollSection } from "@/components/analysis-horizontal-scroll-section";
+// import { AnalysisHorizontalScrollSection } from "@/components/analysis-horizontal-scroll-section";
+import { LawsHorizontalScrollSection } from "@/components/laws-horizontal-scroll-section";
 import { ExamplesSection } from "@/components/examples-section";
 import { EthicsSection } from "@/components/ethics-section";
 import { SkillsSection } from "@/components/skills-section";
@@ -14,7 +15,7 @@ export default function Home() {
       <DotNavigation />
       <main className="scroll-container">
         <section id="hero"><HeroSection /></section>
-        <section id="analysis"><AnalysisHorizontalScrollSection /></section>
+        <section id="analysis"><LawsHorizontalScrollSection /></section>
         <section id="examples"><ExamplesSection /></section>
         <section id="ethics"><EthicsSection /></section>
         <section id="skills"><SkillsSection /></section>

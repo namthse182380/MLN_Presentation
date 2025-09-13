@@ -1,4 +1,5 @@
 import os
+import fnmatch
 
 def save_all_source_code(output_path='output.txt', excluded_dirs=None, excluded_files=None, included_ext=None):
     if excluded_dirs is None:
@@ -6,13 +7,21 @@ def save_all_source_code(output_path='output.txt', excluded_dirs=None, excluded_
             '__pycache__', '_dataset', '_logs', '_model_trained', '_results',
             'node_modules', '.next', '.git', '.venv', '.vscode', '.idea', 'dist', 'build'
         }
+
+    # Dùng pattern thay vì tên chính xác
     if excluded_files is None:
         excluded_files = {
-            os.path.basename(output_path),  # tránh loại nhầm chính file output
-            '.gitignore', 'pyproject.toml', 'credentials.py', 'read_file_for_gpt.py', '.env', 'package-look.json'
+            os.path.basename(output_path),   # tránh loại nhầm chính file output
+            '.gitignore', 'pyproject.toml', 'credentials.py', 'read_file_for_gpt.py',
+            '.env', 'package.json', 'package-lock.json'
         }
+
     if included_ext is None:
         included_ext = {'.py', '.js', '.ts', '.jsx', '.tsx', '.json', '.html', '.css'}
+
+    def is_excluded(file):
+        """Check nếu file nằm trong excluded_files (hỗ trợ pattern)."""
+        return any(fnmatch.fnmatch(file, pattern) for pattern in excluded_files)
 
     file_count = 0
     with open(output_path, 'w', encoding='utf-8') as outfile:
@@ -21,7 +30,7 @@ def save_all_source_code(output_path='output.txt', excluded_dirs=None, excluded_
             dirs[:] = [d for d in dirs if d not in excluded_dirs]
 
             for file in files:
-                if any(file.endswith(ext) for ext in included_ext) and file not in excluded_files:
+                if any(file.endswith(ext) for ext in included_ext) and not is_excluded(file):
                     filepath = os.path.join(root, file)
                     try:
                         with open(filepath, 'r', encoding='utf-8') as f:
@@ -40,7 +49,7 @@ def save_all_source_code(output_path='output.txt', excluded_dirs=None, excluded_
             indent = '    ' * level
             outfile.write(f"{indent}{os.path.basename(dirpath)}/\n")
             for file in filenames:
-                if file not in excluded_files:
+                if not is_excluded(file):
                     subindent = '    ' * (level + 1)
                     outfile.write(f"{subindent}{file}\n")
 

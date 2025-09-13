@@ -1,17 +1,16 @@
-import { HeroSection } from "@/components/hero-section"
-import { TimelineSection } from "@/components/timeline-section"
-import { HistoricalPeriodsSection } from "@/components/historical-periods-section"
-import { KeyFiguresSection } from "@/components/key-figures-section"
-import { Navigation } from "@/components/navigation"
+// app/page.tsx
+import { HeroSection } from "@/components/hero-section";
+import { LawsHorizontalScrollSection } from "@/components/laws-horizontal-scroll-section";
+import { AnalysisHorizontalScrollSection } from "@/components/analysis-horizontal-scroll-section";
+import { ConclusionSection } from "@/components/conclusion-section";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      <Navigation />
+    <div className="scroll-container">
       <HeroSection />
-      <TimelineSection />
-      <HistoricalPeriodsSection />
-      <KeyFiguresSection />
-    </main>
-  )
+      <LawsHorizontalScrollSection />
+      <AnalysisHorizontalScrollSection />
+      <ConclusionSection />
+    </div>
+  );
 }

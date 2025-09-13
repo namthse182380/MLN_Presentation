@@ -22,24 +22,40 @@ const examples = [
 
 const comparisonData = [
     {
-        criteria: "Tốc độ & Độ chính xác",
-        ai: "Rất nhanh, ít sai trong tác vụ lặp đi lặp lại.",
-        human: "Linh hoạt, có thể xử lý các tình huống bất ngờ."
+        criteria: "Quy luật mâu thuẫn",
+        ai: [
+            "Con người: sáng tạo, tư duy phản biện, nhân văn, đạo đức.",
+            "AI: tốc độ xử lý, tự động hoá, chính xác.",
+            "Thống nhất: AI do con người sáng tạo để phục vụ con người.",
+            "Đấu tranh: AI thay thế việc làm, tạo áp lực thất nghiệp, thách thức sáng tạo."
+        ],
+        human: [
+            "Mâu thuẫn thúc đẩy con người phải thích ứng, đổi mới và phát triển."
+        ]
     },
     {
-        criteria: "Sáng tạo & Trí tưởng tượng",
-        ai: "Mô phỏng dựa trên dữ liệu, thiếu ý tưởng đột phá.",
-        human: "Sáng tạo bản chất, đổi mới thực sự."
+        criteria: "Quy luật lượng - chất",
+        ai: [
+            "Giai đoạn đầu: AI chỉ là công cụ hỗ trợ, thay đổi lượng (năng suất, tiết kiệm chi phí, thời gian).",
+            "Giai đoạn phát triển cao: AI sáng tạo (viết, vẽ, nghiên cứu), tạo bước nhảy về chất trong lao động."
+        ],
+        human: [
+            "Nhiều việc cũ biến mất, ngành nghề mới xuất hiện.",
+            "Con người dịch chuyển sang vai trò quản trị, định hướng và sáng tạo ở tầng cao hơn."
+        ]
     },
     {
-        criteria: "Đạo đức & Trách nhiệm",
-        ai: "Phụ thuộc vào lập trình và kiểm soát của con người.",
-        human: "Có khả năng ra quyết định dựa trên giá trị nhân văn."
-    },
-    {
-        criteria: "Thích nghi",
-        ai: "Tốt nếu có dữ liệu và mô hình phù hợp.",
-        human: "Thích ứng linh hoạt với môi trường hoàn toàn mới."
+        criteria: "Quy luật phủ định của phủ định",
+        ai: [
+            "AI kế thừa trí tuệ, tri thức con người.",
+            "Phủ định lao động cũ (lặp lại, thủ công).",
+            "Mở ra lao động mới (sáng tạo, quản trị công nghệ, nhân văn).",
+            "Quá trình phát triển theo đường xoáy ốc: con người → AI → con người nâng cấp AI."
+        ],
+        human: [
+            "Xã hội phát triển đi lên liên tục.",
+            "Con người không mất chỗ đứng, mà bước lên tầm cao mới của trí tuệ và sáng tạo."
+        ]
     }
 ];
 
@@ -86,22 +102,34 @@ export function ExamplesSection() {
         </div>
 
         <div className="bg-card p-8 rounded-2xl border animate-fade-in-up [animation-delay:500ms]">
-            <h3 className="text-3xl font-bold text-center mb-8">So sánh AI và Con người</h3>
+            <h3 className="text-3xl font-bold text-center mb-8">Quan hệ giữa AI và con người</h3>
             <div className="overflow-x-auto">
                 <table className="w-full text-left table-auto">
                     <thead>
                         <tr className="border-b">
-                            <th className="p-4 text-lg font-semibold">Tiêu chí</th>
-                            <th className="p-4 text-lg font-semibold text-green-400">Ưu điểm của AI</th>
-                            <th className="p-4 text-lg font-semibold text-blue-400">Ưu điểm của Con người</th>
+                            <th className="p-4 text-lg font-semibold">Quy luật</th>
+                            <th className="p-4 text-lg font-semibold text-green-400">Biểu hiện trong mối quan hệ Con người - AI</th>
+                            <th className="p-4 text-lg font-semibold text-blue-400">Ý nghĩa/Kết quả</th>
                         </tr>
                     </thead>
                     <tbody>
                         {comparisonData.map((row, i) => (
                             <tr key={i} className="border-b last:border-0">
                                 <td className="p-4 font-medium">{row.criteria}</td>
-                                <td className="p-4 text-muted-foreground">{row.ai}</td>
-                                <td className="p-4 text-muted-foreground">{row.human}</td>
+                                <td className="p-4 text-muted-foreground">
+                                    <ul className="list-disc list-inside space-y-1">
+                                        {row.ai.map((item, index) => (
+                                            <li key={index}>{item}</li>
+                                        ))}
+                                    </ul>
+                                </td>
+                                <td className="p-4 text-muted-foreground">
+                                    <ul className="list-disc list-inside space-y-1">
+                                        {row.human.map((item, index) => (
+                                            <li key={index}>{item}</li>
+                                        ))}
+                                    </ul>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

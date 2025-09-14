@@ -5,7 +5,7 @@ import { LawsHorizontalScrollSection } from "@/components/laws-horizontal-scroll
 import { ExamplesSection } from "@/components/examples-section";
 import { EthicsSection } from "@/components/ethics-section";
 import { SkillsSection } from "@/components/skills-section";
-import { ChatbotSection } from "@/components/chatbot-section";
+// import { ChatbotSection } from "@/components/chatbot-section";
 import { ConclusionSection } from "@/components/conclusion-section";
 import { DotNavigation } from "@/components/dot-navigation";
 
@@ -19,7 +19,7 @@ export default function Home() {
         <section id="examples"><ExamplesSection /></section>
         <section id="ethics"><EthicsSection /></section>
         <section id="skills"><SkillsSection /></section>
-        <section id="chatbot"><ChatbotSection /></section>
+        {/* <section id="chatbot"><ChatbotSection /></section> */}
         <section id="conclusion"><ConclusionSection /></section>
       </main>
     </>

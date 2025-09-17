@@ -5,9 +5,9 @@ const sections = [
     { id: 'hero', label: 'Mở đầu' },
     { id: 'analysis', label: 'Phân tích' },
     { id: 'examples', label: 'Ví dụ' },
-    { id: 'ethics', label: 'Đạo đức' },
+    // { id: 'ethics', label: 'Đạo đức' },
     { id: "skills", label: 'Kỹ năng' },
-    { id: 'chatbot', label: 'Chatbot' },
+    // { id: 'chatbot', label: 'Chatbot' },
     { id: 'conclusion', label: 'Kết luận' },
 ];
 

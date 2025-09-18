@@ -113,11 +113,11 @@ export function AppendixSection() {
                     <div className="space-y-3 text-muted-foreground text-sm pl-9 border-l border-border ml-3">
                       <p><strong className="text-foreground font-semibold">Công cụ:</strong> {usage.tool}</p>
                       <p><strong className="text-foreground font-semibold">Mục đích:</strong> {usage.purpose}</p>
-                      <div>
+                      {/* <div>
                         <p className="text-foreground font-semibold">Ví dụ Prompt:</p>
                         <code className="block text-xs bg-background p-2 rounded mt-1 font-mono border">{usage.promptExample}</code>
-                      </div>
-                      <p><strong className="text-foreground font-semibold">Đóng góp của Con người:</strong> {usage.humanContribution}</p>
+                      </div> */}
+                      <p><strong className="text-foreground font-semibold">Thành viên đóng góp:</strong> {usage.humanContribution}</p>
                     </div>
                   </div>
                 )
@@ -125,7 +125,7 @@ export function AppendixSection() {
             </div>
           </div>
 
-          {/* --- PHẦN TÀI LIỆU THAM KHẢO --- */}
+          {/* --- PHẦN TÀI LIỆU THAM KHẢO ---
           <div className="animate-fade-in-up [animation-delay:800ms]">
             <div className="text-center mb-12">
               <h3 className="font-serif text-3xl font-bold text-foreground">Tài Liệu Tham Khảo</h3>
@@ -163,6 +163,7 @@ export function AppendixSection() {
               })}
             </div>
           </div>
+        </div> */}
         </div>
       </div>
     </section>

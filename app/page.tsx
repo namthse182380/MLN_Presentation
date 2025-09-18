@@ -8,6 +8,7 @@ import { SkillsSection } from "@/components/skills-section";
 // import { ChatbotSection } from "@/components/chatbot-section";
 import { ConclusionSection } from "@/components/conclusion-section";
 import { DotNavigation } from "@/components/dot-navigation";
+import { AppendixSection } from "@/components/appendix-section";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <section id="skills"><SkillsSection /></section>
         {/* <section id="chatbot"><ChatbotSection /></section> */}
         <section id="conclusion"><ConclusionSection /></section>
+        <section id="appendix"><AppendixSection /></section>
       </main>
     </>
   );

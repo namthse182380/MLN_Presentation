@@ -1,17 +1,20 @@
 "use client";
 import { useState, useEffect } from 'react';
 
+// BƯỚC 1: Thêm 'appendix' vào danh sách sections
 const sections = [
     { id: 'hero', label: 'Mở đầu' },
-    { id: 'analysis', label: 'Phân tích' },
+    { id: 'laws', label: 'Ba quy luật' }, // Đổi tên cho rõ hơn
     { id: 'examples', label: 'Ví dụ' },
-    // { id: 'ethics', label: 'Đạo đức' },
+    { id: 'ethics', label: 'Đạo đức' },
     { id: "skills", label: 'Kỹ năng' },
-    // { id: 'chatbot', label: 'Chatbot' },
+    { id: 'chatbot', label: 'Chatbot' },
     { id: 'conclusion', label: 'Kết luận' },
+    { id: 'appendix', label: 'Phụ lục' }, // Section mới
 ];
 
 export function DotNavigation() {
+    // Toàn bộ logic bên trong component này giữ nguyên, không cần thay đổi gì cả.
     const [activeSection, setActiveSection] = useState('hero');
 
     useEffect(() => {
@@ -25,7 +28,6 @@ export function DotNavigation() {
                 const el = document.getElementById(section.id);
                 if (el) {
                     const rect = el.getBoundingClientRect();
-                    // Adjust logic to work within the scroll container
                     if (rect.top <= scrollPosition && rect.bottom >= scrollPosition) {
                         currentSection = section.id;
                     }
